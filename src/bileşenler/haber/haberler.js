@@ -4,6 +4,15 @@ import './haberler.less'
 // ES6 Modülleri ile ilgili bilgi için bakabilirsiniz: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
 const data = [
   {
+    baslik: 'Bunun Haber Degeri Yok!',
+    tarih: '11 Mart 2028',
+    ilkParagraf: `Deneme haber 1. paragraf`,
+
+    ikinciParagraf: `Deneme haber 2. paragraf`,
+
+    ucuncuParagraf: `Deneme haber 3. paragraf`
+  },
+  ,{
     baslik: 'Workintech Öğrencileri: "Bizler en iyi öğrencileriz!"',
     tarih: '11 Kasım 2022',
     ilkParagraf: `Lucas ipsum dolor sit amet ben twi'lek padmé darth darth darth moff hutt organa twi'lek. Ben amidala secura skywalker lando
@@ -90,6 +99,51 @@ const data = [
   }
 ];
 
+const haberYapici = (haberTitle, haberDate, p1, p2, p3,) => {
+  const makale = document.createElement("div");
+  makale.classList.add("article");
+
+  const title = document.createElement("h2");
+  title.textContent = haberTitle;
+  makale.append(title);
+
+  const date = document.createElement("p");
+  date.classList.add("tarih")
+  date.textContent = haberDate;
+  makale.append(date);
+
+  const paragraph1 = document.createElement("p");
+  paragraph1.textContent = p1; 
+  const paragraph2 = document.createElement("p");
+  paragraph2.textContent = p2; 
+  const paragraph3 = document.createElement("p");
+  paragraph3.textContent = p3; 
+  makale.append(paragraph1);
+  makale.append(paragraph2);
+  makale.append(paragraph3);
+
+  const expand = document.createElement("span");
+  expand.classList.add("expandButton");
+  expand.textContent = "+"
+  expand.addEventListener("click",(e) => {
+    makale.classList.toggle("article-open")
+  })
+  makale.append(expand);
+
+  return makale;
+}
+
+data.forEach((item) => {
+  const haberList = haberYapici(
+    item.baslik,
+    item.tarih,
+    item.ilkParagraf,
+    item.ikinciParagraf,
+    item.ucuncuParagraf
+  );
+
+  document.getElementsByClassName("articles")[0].append(haberList);
+});
 /*
   Adım 1: Haber oluşturmak için 'haberYapici' adında bir bileşen(component) oluşturun.
   Bileşeniniz, argümanı haberleri içeren dizi olarak alan bir fonksiyon olacak,
